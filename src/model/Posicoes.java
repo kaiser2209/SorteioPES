@@ -31,4 +31,8 @@ public class Posicoes {
     public void remove(Posicao p) {
         posicoes.remove(p);
     }
+    
+    public List<Posicao> getPosicoes() {
+        return posicoes;
+    }
 }

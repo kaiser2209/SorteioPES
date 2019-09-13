@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +25,7 @@ import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
 import model.Jogador;
 import model.Jogadores;
+import model.Posicao;
 import model.Posicoes;
 import util.LerJogadores;
 
@@ -81,9 +84,9 @@ public class MainController implements Initializable {
     @FXML
     private Label lblTotPTE;
     @FXML
-    private ComboBox<?> cboProxClube;
+    private ComboBox<String> cboProxClube;
     @FXML
-    private ComboBox<?> cboProxPos;
+    private ComboBox<Posicao> cboProxPos;
     @FXML
     private Button btnSortear;
     @FXML
@@ -119,6 +122,23 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        List<String> clubes = new ArrayList<>();
+        clubes.add("Manchester United");
+        clubes.add("Monaco");
+        clubes.add("Arsenal");
+        clubes.add("Udinese");
+        clubes.add("Internazionale");
+        clubes.add("Juventus");
+        clubes.add("São Paulo");
+        clubes.add("Celtic");
+        clubes.add("Bayern");
+        clubes.add("Cruzeiro");
+        clubes.add("Milan");
+        clubes.add("PSG");
+        clubes.add("Barcelona");
+        
+        ObservableList<String> listaClubes = FXCollections.observableArrayList(clubes);
+        cboProxClube.getItems().addAll(clubes);
     }    
 
     @FXML
