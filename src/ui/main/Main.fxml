@@ -92,19 +92,19 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="btnManUtd" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Manchester United (23)" />
-                              <Button fx:id="btnMonaco" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Monaco (23)" GridPane.columnIndex="1" />
-                              <Button fx:id="btnArsenal" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Arsenal (23)" GridPane.rowIndex="1" />
-                              <Button fx:id="btnUdinese" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Udinese (23)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button fx:id="btnInter" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Internazionale (23)" GridPane.rowIndex="2" />
-                              <Button fx:id="btnJuventus" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Juventus (23)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Button fx:id="btnSaoPaulo" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="São Paulo (23)" GridPane.rowIndex="3" />
-                              <Button fx:id="btnCeltic" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Celtic (23)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Button fx:id="btnBayern" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Bayern (23)" GridPane.rowIndex="4" />
-                              <Button fx:id="btnCruzeiro" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Cruzeiro (23)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Button fx:id="btnMilan" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Milan (23)" GridPane.rowIndex="5" />
-                              <Button fx:id="btnPSG" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="PSG (23)" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Button fx:id="btnBarcelona" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Barcelona (23)" GridPane.rowIndex="6" />
+                              <Button fx:id="btnManUtd" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Manchester United (0)" />
+                              <Button fx:id="btnMonaco" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Monaco (0)" GridPane.columnIndex="1" />
+                              <Button fx:id="btnArsenal" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Arsenal (0)" GridPane.rowIndex="1" />
+                              <Button fx:id="btnUdinese" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Udinese (0)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button fx:id="btnInter" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Internazionale (0)" GridPane.rowIndex="2" />
+                              <Button fx:id="btnJuventus" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Juventus (0)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Button fx:id="btnSaoPaulo" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="São Paulo (0)" GridPane.rowIndex="3" />
+                              <Button fx:id="btnCeltic" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Celtic (0)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Button fx:id="btnBayern" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Bayern (0)" GridPane.rowIndex="4" />
+                              <Button fx:id="btnCruzeiro" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Cruzeiro (0)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Button fx:id="btnMilan" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Milan (0)" GridPane.rowIndex="5" />
+                              <Button fx:id="btnPSG" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="PSG (0)" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Button fx:id="btnBarcelona" alignment="CENTER" minWidth="150.0" mnemonicParsing="false" onAction="#mostraJogadores" text="Barcelona (0)" GridPane.rowIndex="6" />
                            </children>
                         </GridPane>
                      </content>

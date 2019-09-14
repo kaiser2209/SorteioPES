@@ -37,4 +37,12 @@ public class Clube {
     public void updateButtonText() {
         botao.setText(nome + "(" + jogadores.size() + ")");
     }
+    
+    public Button getButton() {
+        return botao;
+    }
+    
+    public Jogadores getJogadores() {
+        return jogadores;
+    }
 }

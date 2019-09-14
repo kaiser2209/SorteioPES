@@ -17,7 +17,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -26,13 +29,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import jxl.read.biff.BiffException;
 import model.Clube;
 import model.Jogador;
 import model.Jogadores;
 import model.Posicao;
 import model.Posicoes;
+import ui.lista.ListaJogadoresController;
 import util.AlertDialog;
 import util.LerJogadores;
 
@@ -290,8 +296,6 @@ public class MainController implements Initializable {
             
             clubeSelecionado.updateButtonText();
             
-            atualizarTotalJogadores();
-            
             switch (posSelecionada) {
                 case 0:
                     jogadoresGOL.remove(j);
@@ -336,6 +340,8 @@ public class MainController implements Initializable {
                     j = null;
             }
             
+            atualizarTotalJogadores();
+            
             int selecao = cboProxClube.getSelectionModel().getSelectedIndex();
             if (selecao < 13) {
                 selecao ++;
@@ -351,7 +357,27 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void mostraJogadores(ActionEvent event) {
+    private void mostraJogadores(ActionEvent event) throws IOException {
+        Button botao = (Button) event.getSource();
+        Clube clubeClicado = null;
+        for(Clube c : clubes) {
+            if (c.getButton().equals(botao)) {
+                clubeClicado = c;
+            }
+        }
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/lista/ListaJogadores.fxml"));
+        Parent root = loader.load();
+        Scene cena = new Scene(root);
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setResizable(false);
+        stage.setTitle("Escalação " + clubeClicado);
+        stage.setScene(cena);
+        ListaJogadoresController controller = (ListaJogadoresController) loader.getController();
+        controller.carregarClube(clubeClicado);
+        //controller.setInformacoes(Genetico.melhores, Genetico.totalGeracoes);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
     
     private void atualizarTotalJogadores() {
