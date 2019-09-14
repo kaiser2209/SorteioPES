@@ -29,7 +29,8 @@ public class LerJogadores {
         for (int i = 0; i < linhas; i++) {
             String valor = sheet.getCell(0, i).getContents();
             if (!(valor.equals("Jogador") || valor.equals(""))) {
-                String nome = new String(sheet.getCell(0, i).getContents().getBytes("Utf-8"), "ISO-8859-1");
+                String nome = new String(sheet.getCell(0, i).getContents().getBytes("UTF-8"), "Windows-1252");
+                //String nome = sheet.getCell(0, i).getContents();
                 String posicao = sheet.getCell(4, i).getContents();
                 int overall = Integer.parseInt(sheet.getCell(5, i).getContents());
                 Jogador j = new Jogador(nome, posicoes.getPosicao(posicao), overall);

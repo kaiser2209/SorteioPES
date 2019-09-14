@@ -10,23 +10,30 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
+import model.Clube;
 import model.Jogador;
 import model.Jogadores;
 import model.Posicao;
 import model.Posicoes;
+import util.AlertDialog;
 import util.LerJogadores;
 
 /**
@@ -50,6 +57,7 @@ public class MainController implements Initializable {
     private Jogadores jogadoresCA = new Jogadores();
     private Jogadores jogadoresPTD = new Jogadores();
     private Jogadores jogadoresPTE = new Jogadores();
+    private List<Clube> clubes = new ArrayList<>();
 
     @FXML
     private Button btnCarregaArquivo;
@@ -84,7 +92,7 @@ public class MainController implements Initializable {
     @FXML
     private Label lblTotPTE;
     @FXML
-    private ComboBox<String> cboProxClube;
+    private ComboBox<Clube> cboProxClube;
     @FXML
     private ComboBox<Posicao> cboProxPos;
     @FXML
@@ -115,6 +123,8 @@ public class MainController implements Initializable {
     private Button btnPSG;
     @FXML
     private Button btnBarcelona;
+    @FXML
+    private TextField txtJogadoresSorteio;
 
     /**
      * Initializes the controller class.
@@ -122,6 +132,20 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        clubes.add(new Clube("Manchester United", btnManUtd));
+        clubes.add(new Clube("Monaco", btnMonaco));
+        clubes.add(new Clube("Arsenal", btnArsenal));
+        clubes.add(new Clube("Udinese", btnUdinese));
+        clubes.add(new Clube("Internazionale", btnInter));
+        clubes.add(new Clube("Juventus", btnJuventus));
+        clubes.add(new Clube("São Paulo", btnSaoPaulo));
+        clubes.add(new Clube("Celtic", btnCeltic));
+        clubes.add(new Clube("Bayern", btnBayern));
+        clubes.add(new Clube("Cruzeiro", btnCruzeiro));
+        clubes.add(new Clube("Milan", btnMilan));
+        clubes.add(new Clube("PSG", btnPSG));
+        clubes.add(new Clube("Barcelona", btnBarcelona));
+        /*
         List<String> clubes = new ArrayList<>();
         clubes.add("Manchester United");
         clubes.add("Monaco");
@@ -136,9 +160,11 @@ public class MainController implements Initializable {
         clubes.add("Milan");
         clubes.add("PSG");
         clubes.add("Barcelona");
-        
-        ObservableList<String> listaClubes = FXCollections.observableArrayList(clubes);
+*/
         cboProxClube.getItems().addAll(clubes);
+        
+        cboProxClube.getSelectionModel().select(0);
+        
     }    
 
     @FXML
@@ -165,6 +191,9 @@ public class MainController implements Initializable {
     
     public void setPosicoes(Posicoes posicoes) {
         this.posicoes = posicoes;
+        cboProxPos.getItems().addAll(posicoes.getPosicoes());
+        
+        cboProxPos.getSelectionModel().select(0);
     }
     
     private void carregaJogadores(List<Jogador> jogadores) {
@@ -198,6 +227,134 @@ public class MainController implements Initializable {
             } 
         }
         
+        atualizarTotalJogadores();
+    }
+
+    @FXML
+    private void realizarSorteio(ActionEvent event) {
+        Random rnd = new Random();
+        int sorteado = rnd.nextInt(Integer.parseInt(txtJogadoresSorteio.getText()));
+        
+        Jogador j;
+        int posSelecionada = cboProxPos.getSelectionModel().getSelectedIndex();
+        
+        switch (posSelecionada) {
+            case 0:
+                j = jogadoresGOL.getJogador(sorteado);
+                break;
+            case 1:
+                j = jogadoresLD.getJogador(sorteado);
+                break;
+            case 2:
+                j = jogadoresLE.getJogador(sorteado);
+                break;
+            case 3:
+                j = jogadoresZC.getJogador(sorteado);
+                break;
+            case 4:
+                j = jogadoresVOL.getJogador(sorteado);
+                break;
+            case 5:
+                j = jogadoresMC.getJogador(sorteado);
+                break;
+            case 6:
+                j = jogadoresALD.getJogador(sorteado);
+                break;
+            case 7:
+                j = jogadoresALE.getJogador(sorteado);
+                break;
+            case 8:
+                j = jogadoresMAT.getJogador(sorteado);
+                break;
+            case 9:
+                j = jogadoresSA.getJogador(sorteado);
+                break;
+            case 10:
+                j = jogadoresCA.getJogador(sorteado);
+                break;
+            case 11:
+                j = jogadoresPTD.getJogador(sorteado);
+                break;
+            case 12:
+                j = jogadoresPTE.getJogador(sorteado);
+                break;
+            default:
+                j = null;
+        }
+        
+        Optional<ButtonType> confirmacao = AlertDialog.showConfirmMessage("JOGADOR SORTEADO", "Deseja ficar com o jogador?", j.getNome(), Alert.AlertType.CONFIRMATION);
+
+        if (confirmacao.get() == ButtonType.OK) {
+            Clube clubeSelecionado = cboProxClube.getSelectionModel().getSelectedItem();
+            clubeSelecionado.addJogador(j);
+            
+            clubeSelecionado.updateButtonText();
+            
+            atualizarTotalJogadores();
+            
+            switch (posSelecionada) {
+                case 0:
+                    jogadoresGOL.remove(j);
+                    break;
+                case 1:
+                    jogadoresLD.remove(j);
+                    break;
+                case 2:
+                    jogadoresLE.remove(j);
+                    break;
+                case 3:
+                    jogadoresZC.remove(j);
+                    break;
+                case 4:
+                    jogadoresVOL.remove(j);
+                    break;
+                case 5:
+                    jogadoresMC.remove(j);
+                    break;
+                case 6:
+                    jogadoresALD.remove(j);
+                    break;
+                case 7:
+                    jogadoresALE.remove(j);
+                    break;
+                case 8:
+                    jogadoresMAT.remove(j);
+                    break;
+                case 9:
+                    jogadoresSA.remove(j);
+                    break;
+                case 10:
+                    jogadoresCA.remove(j);
+                    break;
+                case 11:
+                    jogadoresPTD.remove(j);
+                    break;
+                case 12:
+                    jogadoresPTE.remove(j);
+                    break;
+                default:
+                    j = null;
+            }
+            
+            int selecao = cboProxClube.getSelectionModel().getSelectedIndex();
+            if (selecao < 13) {
+                selecao ++;
+            } else {
+                selecao = 0;
+            }
+            
+            cboProxClube.getSelectionModel().select(selecao);
+        }
+        
+        System.out.println(j.getNome());
+        
+    }
+
+    @FXML
+    private void mostraJogadores(ActionEvent event) {
+    }
+    
+    private void atualizarTotalJogadores() {
         lblJogadores.setText(jogadores.size() + " jogadores carregados!");
         lblTotGOL.setText(jogadoresGOL.size() + " goleiros");
         lblTotLD.setText(jogadoresLE.size() + " laterais esquerdos");
@@ -212,14 +369,6 @@ public class MainController implements Initializable {
         lblTotCA.setText(jogadoresCA.size() + " centroavantes");
         lblTotPTD.setText(jogadoresPTD.size() + " pontas direitas");
         lblTotPTE.setText(jogadoresPTE.size() + " pontas esquerdas");
-    }
-
-    @FXML
-    private void realizarSorteio(ActionEvent event) {
-    }
-
-    @FXML
-    private void mostraJogadores(ActionEvent event) {
     }
 }
  

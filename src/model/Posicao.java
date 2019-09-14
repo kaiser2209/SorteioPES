@@ -33,5 +33,12 @@ public class Posicao {
     public void setAreaAtuacao(AreaAtuacao areaAtuacao) {
         this.areaAtuacao = areaAtuacao;
     }
+
+    @Override
+    public String toString() {
+        return pos;
+    }
+    
+    
     
 }
